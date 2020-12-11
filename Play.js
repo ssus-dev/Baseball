@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet} from "react-native";
+import {StyleSheet,useWindowDimensions} from "react-native";
 
 class Play extends Component {
 	state = {
@@ -10,8 +10,14 @@ class Play extends Component {
 		randomNum: this.props.getNum,
 		popupContents: ""
 	}
-
+	
 	render() {
+
+		// calc대체용도 관련링크 : https://snack.expo.io/@asad_4561/87dc08?session_id=snack-session-FGVnhyoDp&preview=true&platform=web&iframeId=ufwds87fh5&supportedPlatforms=ios,android&name=useWindowDimensions&description=Example%20usage&waitForData=true
+		// const windowWidth = useWindowDimensions().width;
+		// const windowHeight = useWindowDimensions().height;
+
+
 		let { number1, number2, number3, userInput, randomNum, popupContents } = this.state;
 		console.log("render() , randomNum = "+randomNum);
 		
@@ -75,40 +81,39 @@ class Play extends Component {
 			<>
 				<div className="playWrap" style={styles.playWrap}>
 					{/* User-InputData */}
-					<article className="inputWrap">
-						<p className="inputArea">{number1}</p>
-						<p className="inputArea">{number2}</p>
-						<p className="inputArea">{number3}</p>
+					<article className="inputWrap" style={styles.inputWrap}>
+						<p className="inputArea" style={styles.inputArea}>{number1}</p>
+						<p className="inputArea" style={styles.inputArea}>{number2}</p>
+						<p className="inputArea" style={styles.inputArea}>{number3}</p>
 					</article>
 					{/* Game-NumberButton */}
-					<div className="key">
-						<input type="button" value="1" onClick={pressNum}  className="keybtn"/>
-						<input type="button" value="2" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="3" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="4" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="5" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="6" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="7" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="8" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="9" onClick={pressNum} className="keybtn"/>
-						<input type="button" value="0" onClick={pressNum} className="keybtn"/>
-						{/* <audio src={require("./mp3/sound.mp3")}></audio> */}
+					<div className="key" style={styles.key}>
+						<input type="button" value="1" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="2" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="3" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="4" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="5" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="6" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="7" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="8" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="9" onClick={pressNum} style={styles.keybtn}/>
+						<input type="button" value="0" onClick={pressNum} style={styles.keybtn}/>
 					</div>
-					<div className="bottomBtnWrap">
-						<button onClick={deleteData} className="deleteBtn">←</button>
-						<button onClick={confirm} className="confirmBtn">확인</button>
+					<div className="bottomBtnWrap" style={styles.bottomBtnWrap}>
+						<button onClick={deleteData} className="deleteBtn" style={styles.deleteBtn}>←</button>
+						<button onClick={confirm} className="confirmBtn" style={styles.confirmBtn}>확인</button>
 					</div>
-					<ul id="listWrap" className="listWrap"></ul>
+					<ul id="listWrap" style={styles.listWrap}></ul>
 
 					{/* Layer-Popup */}
-					<div className="dimdBg" id="popup">
-						<div className="popup">
-							<button className="close" onClick={() => {document.getElementById("popup").style.display = "none"}}></button>
-							<p className="popupContents">{popupContents}</p>
+					<div className="dimdBg" id="popup" style={styles.dimdBg}>
+						<div className="popup" style={styles.popup}>
+							<button style={styles.close} className="close" onClick={() => {document.getElementById("popup").style.display = "none"}}></button>
+							<p className="popupContents" style={styles.popupContents}>{popupContents}</p>
 
-							<div id="btnWrap">
-								<button className="agianBtn" onClick={() => {document.getElementById("popup").style.display = "none"}}>다시하기</button>
-								<button className="offBtn" onClick={ () => { this.props.changeView("Start");}}>게임종료</button>
+							<div id="btnWrap" className="btnWrap" style={styles.btnWrap}>
+								<button className="agianBtn" onClick={() => {document.getElementById("popup").style.display = "none"}} style={styles.agianBtn}>다시하기</button>
+								<button  style={styles.offBtn} className="offBtn" onClick={ () => { this.props.changeView("Start");}}>게임종료</button>
 							</div>
 						</div>
 					</div>
@@ -126,8 +131,8 @@ const styles = StyleSheet.create({
 		height:100,
 		background: "#fff",
 		position: "absolute",
-		background: "url(img/bg.jpg) no-repeat center cente",
-		backgroundSize: "cover",
+		// background: "url(img/bg.jpg) no-repeat center cente",
+		// backgroundSize: "cover",
 		overflow: "hidden",
 		paddingVertical:30,
 		paddingHorizontal:20
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
 		marginVertical : 10,
 		marginHorizontal:"auto",
 		height:100,
-		background: "rgba(255,255,255,0.6)",
+		backgroundColor: "rgba(255,255,255,0.6)",
 		borderRadius: 30,
 		paddingVertical:10,
 		paddingHorizontal:20,
@@ -150,8 +155,8 @@ const styles = StyleSheet.create({
 		width:30,
 		float:"left",
 		height:100,
-		background:"url(./img/input_bg.png) no-repeat center center",
-		backgroundSize: "contain",
+		// background:"url(./img/input_bg.png) no-repeat center center",
+		// backgroundSize: "contain",
 		lineHeight: 80,
 		color:"#242f33",
 		textAlign: "center",
@@ -178,7 +183,7 @@ const styles = StyleSheet.create({
 		lineHeight: 80,
 		fontSize: 30,
 		borderRadius: 100,
-		background:"rgba(255,255,255,0.9)",
+		backgroundColor:"rgba(255,255,255,0.9)",
 		fontFamily: "nanum",
 		fontWeight:"bold",
 		border:"1px solid #eaeaea"
@@ -193,5 +198,97 @@ const styles = StyleSheet.create({
 		background: "#fff"
 	},
 // #listWrap *{width:100%;height:20px;font-size: 20px;font-family: "nanum";border-bottom:1px solid #eaeaea;}
+	deleteBtn : {
+		// width:calc(30% - 10px),
+		height:70,
+		textAlign: "center",
+		color:"#242f33",
+		fontWeight:500,
+		fontSize:45,
+		borderRadius: 100,
+		fontFamily: "nanum",
+		backgroundColor: "#fecc62",
+		lineHeight: 65
+	},
+	confirmBtn : {
+		float: "right",
+		background: "#242f33",
+		// width:calc(70% - 10px),
+		height:70,
+		textAlign: "center",
+		color:"#fff",
+		fontWeight:500,
+		fontSize:30,
+		borderRadius: 100,
+		fontFamily: "nanum",
+		// backgroundSize: "contain",
+		lineHeight: 70
+	},
+	popup : {
+		// width:calc(100% - 30px),
+		height:"auto",
+		padding:20,
+		boxSizing: "border-box",
+		background: "#fff",
+		borderRadius: 10,
+		display: "block",
+		position: "absolute",
+		top:50,
+		left:50,
+		// transform: translate(-50%,-50%)
+	},
+	dimdBg : {
+		backgroundColor:"rgba(0,0,0,0.5)",
+		width:100,
+		height:100,
+		display: "block",
+		position: "fixed",
+		top:0,
+		left:0,
+		display: "none"
+	},
+	close : {
+		width:40,
+		height:40,
+		float:"right",
+		marginTop:-12,
+		marginRight: -12,
+		// background: "url(img/bats.png)no-repeat center center",
+		// backgroundSize: "contain"
+	},
+	popupContents : {
+		width:100,
+		fontSize:24,
+		color:"#242f33",
+		textAlign: "center",
+		marginTop:20,
+		marginBottom:30,
+		fontFamily: "nanum",
+		fontWeight: 300
+	},
+	btnWrap:{
+		width:100,
+		height:50
+	},
+	offBtn : {
+		// width:calc(50% - 5px),
+		float:"left",
+		height:50,
+		color:"#fff",
+		fontSize: 20,
+		fontFamily: "nanum",
+		float: "right",
+		background: "#e59509"
+	},
+	agianBtn : {
+		// width:calc(50% - 5px),
+		float:"left",
+		height:50,
+		color:"#fff",
+		fontSize: 20,
+		fontFamily: "nanum",
+		background: "#242f33"
+	}
 })
+
 export default Play;

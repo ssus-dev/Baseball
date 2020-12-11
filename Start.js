@@ -1,6 +1,5 @@
-import "./start.css";
-import "./index.css";
 import React, { Component } from "react";
+import {StyleSheet} from "react-native";
 import logo from "./img/logo.png";
 
 class Start extends Component {
@@ -20,6 +19,8 @@ class Start extends Component {
 		);
 	}
 }
+const styles = StyleSheet.create({
 
+})
 export default Start;
 
