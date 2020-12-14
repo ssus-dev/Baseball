@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from "react-native";
 import Start from './Start';
 import Play from './Play';
 
 
-let Game = () => {
+export default Game = () => {
     const [viewName, changeView] = useState("Start");
     let view; //화면 변수
 
@@ -26,19 +25,7 @@ let Game = () => {
     }
 
     return (
-        // <View>{view} + test</View>
-        <View style={styles.start}>
-            {view}
-        </View>
+        <>{view}</>
     );
-};
+}
 
-const styles = StyleSheet.create({
-    start : {
-        width:"100%",
-        height:"100%"
-    }
-});
-
-
-export default Game;
