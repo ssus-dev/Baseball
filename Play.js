@@ -27,9 +27,12 @@ class Play extends Component {
 		//숫자입력
 		let pressNum = (val) => {
 			//사용자 입력값
-			let thisNum = val.target.value;
-			console.log(clkAudio);
-			clkAudio.play();
+			console.log(val.target.props);
+			let thisNum = val.target.text;
+			// console.log(thisNum);
+
+			// console.log(clkAudio);
+			// clkAudio.play();
 
 			//입력값 넣어주기
 			if (number1 == "") this.setState(() => ({ number1: thisNum }));
@@ -89,16 +92,16 @@ class Play extends Component {
 					</View>
 					{/* Game-NumberButton */}
 					<View style={styles.key}>
-						<TextInput value={1} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={2} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={3} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={4} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={5} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={6} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={7} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={8} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={9} onPress={pressNum} style={styles.keybtn} />
-						<TextInput value={0} onPress={pressNum} style={styles.keybtn} />
+						<Button title="1" onPress={pressNum} style={styles.keybtn} />
+						<Button title="2" onPress={pressNum} style={styles.keybtn} />
+						<Button title="3" onPress={pressNum} style={styles.keybtn} />
+						<Button title="4" onPress={pressNum} style={styles.keybtn} />
+						<Button title="5" onPress={pressNum} style={styles.keybtn} />
+						<Button title="6" onPress={pressNum} style={styles.keybtn} />
+						<Button title="7" onPress={pressNum} style={styles.keybtn} />
+						<Button title="8" onPress={pressNum} style={styles.keybtn} />
+						<Button title="9" onPress={pressNum} style={styles.keybtn} />
+						<Button title="0" onPress={pressNum} style={styles.keybtn} />
 					</View>
 					<View style={styles.bottomBtnWrap}>
 						<Button title="←" onPress={deleteData} style={styles.deleteBtn} />
@@ -192,9 +195,6 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		borderRadius: 100,
 		backgroundColor: "rgba(255,255,255,0.9)",
-		fontFamily: "nanum",
-		fontWeight: "bold",
-		border: "1px solid #eaeaea"
 	},
 	// keybtn:last-child : {width:100}
 	listWrap: {
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
 	},
 	// #listWrap *{width:100%;height:20px;font-size: 20px;font-family: "nanum";border-bottom:1px solid #eaeaea;}
 	deleteBtn: {
-		// width:calc(30% - 10px),
+		width:"50%",
 		height: 70,
 		textAlign: "center",
 		color: "#242f33",
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
 	confirmBtn: {
 		float: "right",
 		backgroundColor: "#242f33",
-		// width:calc(70% - 10px),
+		width:"50%",
 		height: 70,
 		textAlign: "center",
 		color: "#fff",
