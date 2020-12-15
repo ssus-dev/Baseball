@@ -5,7 +5,7 @@ class Start extends Component {
 		return (
 			<View style={styles.startWrap} id="startWrap">
 				<ImageBackground source={require('./assets/img/bg.jpg')} style={styles.bgImg}>
-					<Image source={require('./assets/img/logo.png')} style={styles.logo} />
+					<Image source={require('./assets/img/logo.png')} style={styles.logo} resizeMode="contain"/>
 					<Button style={styles.startBtn} title="GameStart" onPress={() => { this.props.changeView("Play");}} />
 				</ImageBackground>
 			</View>
