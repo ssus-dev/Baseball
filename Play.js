@@ -70,8 +70,8 @@ class Play extends Component {
 				if (strike > 0) result += strike + "Strike ";
 				if (out > 0) result += out + "Out ";
 				total += result;
-				let addString = "현재 결과는 [ " + total + "] 입니다.";
-				this.setState(() => ({resultTag:<Text>{addString}</Text>}));
+				let addString = "- 현재 결과는 [" + total + "] 입니다.";
+				this.setState(() => ({resultTag:<Text style={styles.list}>{addString}</Text>}));
 			}
 
 		}
@@ -111,12 +111,12 @@ class Play extends Component {
 					</View>
 
 					{/* Layer-Popup */}
-					<View id="popup" style={styles.dimdBg}>
+					<View style={styles.dimdBg} ref={component => this.newComp = component}>
 						<View style={styles.popup}>
 							<Button style={styles.close} onPress={() => { document.getElementById("popup").style.display = "none" }} />
 							<Text style={styles.popupContents}>{popupContents}</Text>
 
-							<View id="btnWrap" style={styles.btnWrap}>
+							<View style={styles.btnWrap}>
 								<Button title="다시하기" onPress={() => { document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} />
 								<Button title="게임종료" style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }} />
 							</View>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
 		width: "33%",
 		float: "left",
 		height: 100,
-		lineHeight: 80,
+		lineHeight: 100,
 		color: "#242f33",
 		textAlign: "center",
 		fontSize: 35,
@@ -168,11 +168,14 @@ const styles = StyleSheet.create({
 	},
 	key: {
 		width: "100%",
-		height: 300,
+		height: 370,
 		display: "flex",
 		flexWrap: "wrap",
 		marginTop:10,
 		marginBottom:10,
+		flexDirection:"row",
+		justifyContent: "space-between",
+		alignContent: "space-around"
 	},
 	keybtn: {
 		width: "30%",
@@ -185,45 +188,47 @@ const styles = StyleSheet.create({
 	},
 	listWrap: {
 		width: "100%",
-		marginVertical: 20,
 		marginHorizontal: "auto",
-		height: 100,
+		marginTop:30,
+		height: 40,
 		overflowY: "scroll",
 		backgroundColor: "#fff",
+	},
+	list : {
+		width:"100%",
+		height:40,
+		fontSize:20,
+		lineHeight:40,
+		textAlign:"center"
 	},
 	bottomBtnWrap : {
 		width: "100%",
 		height:70,
-		borderWidth : 1,
 		display:"flex",
+		flexWrap: "wrap",
 	},
 	deleteBtn: {
-		width:"40%",
+		width:"45%",
 		height: 70,
 		textAlign: "center",
 		color: "#242f33",
-		fontWeight: 500,
 		fontSize: 45,
 		borderRadius: 100,
-		fontFamily: "nanum",
 		backgroundColor: "#fecc62",
-		lineHeight: 60
+		lineHeight: 70
 	},
 	confirmBtn: {
-		float: "right",
 		backgroundColor: "#242f33",
 		width:"45%",
 		height: 70,
 		textAlign: "center",
 		color: "#fff",
-		fontWeight: 500,
 		fontSize: 30,
 		borderRadius: 100,
-		fontFamily: "nanum",
 		lineHeight: 70
 	},
 	popup: {
-		// width:calc(100% - 30px),
+		width:"100%",
 		height: "auto",
 		padding: 20,
 		boxSizing: "border-box",
