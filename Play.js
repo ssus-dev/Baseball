@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RN, { StyleSheet, useWindowDimensions, Button, View, ImageBackground, Text, TouchableOpacity, TouchableHighlight } from "react-native";
+import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import Popup from './Popup';
 
 class Play extends Component {
 	state = {
@@ -9,15 +10,12 @@ class Play extends Component {
 		userInput: [],
 		randomNum: this.props.getNum,
 		popupContents: "",
-		resultTag : ""
+		resultTag : "",
+		popupAddArea : "",
+		popup: <Popup/>
 	}
 
 	render() {
-
-		// calc대체용도 관련링크 : https://snack.expo.io/@asad_4561/87dc08?session_id=snack-session-FGVnhyoDp&preview=true&platform=web&iframeId=ufwds87fh5&supportedPlatforms=ios,android&name=useWindowDimensions&description=Example%20usage&waitForData=true
-		// const windowWidth = useWindowDimensions().width;
-		// const windowHeight = useWindowDimensions().height;
-
 
 		let { number1, number2, number3, userInput, randomNum, popupContents, resultTag } = this.state;
 		console.log("render() , randomNum = " + randomNum);
@@ -45,10 +43,16 @@ class Play extends Component {
 			else if (number1 != "") this.setState(() => ({ number1: "" }));
 		};
 
+		let popupSwitch = (val) => {
+			if(val == "block")	popupAddArea = popup;
+			else				popupAddArea = <Text>안보여야함</Text>;
+		}
+		
+
 		// 값 확인
 		let confirm = () => {
 			let { strike, ball, out } = { strike: 0, ball: 0, out: 0 };
-			let { result, total, list } = { result: " ", total: " ", list:[] };
+			let { result, total } = { result: " ", total: " " };
 
 			for (let i = 0; i < userInput.length; i++) {
 				if (randomNum.includes(userInput[i]) !== -1) {
@@ -60,9 +64,8 @@ class Play extends Component {
 
 			// viewData 쌓기
 			if (strike === 3) {
-				this.setState(() => ({list : "축하합니다! 정답 입니다 :D"}));
-				// list += ;
-				this.setState(() => ({ popupContents: list }), () => { document.getElementById("popup").style.display = "block"; });
+				this.setState(() => ({ popup : <Popup popupContents="축하합니다! 정답 입니다 :D"></Popup> }), popupSwitch("block"));
+				// this.setState(() => ({ popup : <Popup popupContents="축하합니다! 정답 입니다 :D"></Popup> }), () => { document.getElementById("popup").style.display = "block"; });
 
 			} else {
 				//하단 리스트 뿌려주기
@@ -106,22 +109,28 @@ class Play extends Component {
 						<Text onPress={confirm} style={styles.confirmBtn} resizeMode="contain">확인</Text>
 					</View>
 
-					<View id="listWrap" style={styles.listWrap}>
+					<View style={styles.listWrap}>
 						<Text>{resultTag}</Text>
 					</View>
 
 					{/* Layer-Popup */}
-					<View style={styles.dimdBg} ref={component => this.newComp = component}>
-						<View style={styles.popup}>
-							<Button style={styles.close} onPress={() => { document.getElementById("popup").style.display = "none" }} />
-							<Text style={styles.popupContents}>{popupContents}</Text>
+					<View>{popupAddArea}</View>
+					{/* <Popup /> */}
+					{/* <View style={styles.dimdBg}> */}
+						{/* <View style={styles.popup} resizeMode="contain"> */}
+							{/* <Button style={styles.close} onPress={() => { document.getElementById("popup").style.display = "none" }} /> */}
+							{/* <ImageBackground source={require('./assets/img/bats.png')} style={styles.closeImg} resizeMode="contain" ></ImageBackground> */}
+							{/* <Text style={styles.popupContents}>{popupContents}</Text> */}
+							{/* <Text style={styles.popupContents}>testrtred</Text> */}
 
-							<View style={styles.btnWrap}>
-								<Button title="다시하기" onPress={() => { document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} />
-								<Button title="게임종료" style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }} />
-							</View>
-						</View>
-					</View>
+							{/* <View style={styles.btnWrap}> */}
+								{/* <Button title="다시하기" onPress={() => { document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} /> */}
+								{/* <Text style={styles.agianBtn}>다시하기</Text> */}
+								{/* <Text style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }}>게임종료</Text> */}
+							{/* </View> */}
+
+						{/* </View> */}
+					{/* </View> */}
 				</ImageBackground>
 			</View>
 		);
@@ -228,69 +237,70 @@ const styles = StyleSheet.create({
 		lineHeight: 70
 	},
 	popup: {
-		width:"100%",
-		height: "auto",
+		width:"90%",
+		height: 150,
 		padding: 20,
 		boxSizing: "border-box",
 		backgroundColor: "#fff",
 		borderRadius: 10,
 		display: "block",
 		position: "absolute",
-		top: 50,
-		left: 50,
-		transform: { translateX: -50 },
-		transform: { translateY: -50 }
+		top: "50%",
 	},
 	dimdBg: {
 		backgroundColor: "rgba(0,0,0,0.5)",
-		width: 100,
-		height: 100,
+		width: "100%",
+		height: "100%",
 		display: "block",
 		position: "fixed",
 		top: 0,
 		left: 0,
-		display: "none"
+		padding:10,
+		// display: "none"
 	},
-	close: {
+	closeImg: {
 		width: 40,
 		height: 40,
 		float: "right",
 		marginTop: -12,
 		marginRight: -12,
-		// background: "url(img/bats.png)no-repeat center center",
-		// backgroundSize: "contain"
 	},
 	popupContents: {
-		width: 100,
+		width: "100%",
 		fontSize: 24,
 		color: "#242f33",
 		textAlign: "center",
 		marginTop: 20,
 		marginBottom: 30,
-		fontFamily: "nanum",
-		fontWeight: 300
+		height:30,
+		lineHeight:30,
+		borderWidth:1,
 	},
 	btnWrap: {
-		width: 100,
-		height: 50
+		width: "100%",
+		height: 50,
+		flex:"wrap",
+		display: "flex",
+		flexWrap: "wrap",
+		marginTop:20,
+		marginBottom:10,
 	},
 	offBtn: {
-		// width:calc(50% - 5px),
-		float: "left",
+		width:"50%",
 		height: 50,
 		color: "#fff",
 		fontSize: 20,
-		fontFamily: "nanum",
-		float: "right",
+		textAlign:"center",
+		lineHeight:50,
 		backgroundColor: "#e59509"
 	},
 	agianBtn: {
-		// width:calc(50% - 5px),
-		float: "left",
+		width:"50%",
 		height: 50,
 		color: "#fff",
 		fontSize: 20,
-		// fontFamily: "nanum",
+		textAlign:"center",
+		lineHeight:50,
 		backgroundColor: "#242f33"
 	}
 })
