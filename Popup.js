@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import Play from "./Play";
 
 class Popup extends Component {
+	state = {
+		resultText : this.props.contentsText,
+		text : "",
+		changeResult : this.props.changeView
+	}
+
+	onFormSubmit = e => {
+		e.preventDefault();
+		this.props.onSubmit(this.state.text);
+	}
 
 	render() {
+		let {resultText,changeResult} = this.state;
+		console.log(changeResult);
 		return (
 			<View style={styles.dimdBg}>
 				<View style={styles.popup} resizeMode="contain">
 					{/* <Button style={styles.close} onPress={() => { document.getElementById("popup").style.display = "none" }} /> */}
-					<ImageBackground source={require('./assets/img/bats.png')} style={styles.closeImg} resizeMode="contain" ></ImageBackground>
-					<Text style={styles.popupContents}>{this.props.popupContents}</Text>
-					{/* <Text style={styles.popupContents}>testrtred</Text> */}
+					<ImageBackground source={require('./assets/img/bats.png')} style={styles.closeImg} resizeMode="contain" onPress={() => {"부모컴포넌트에서 지워주는 값 던져야함"}}></ImageBackground>
+					<Text style={styles.popupContents}>{resultText}</Text>
 
 					<View style={styles.btnWrap}>
 						{/* <Button title="다시하기" onPress={() => {document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} /> */}
-						<Text style={styles.agianBtn}>다시하기</Text>
-						<Text style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }}>게임종료</Text>
+						<Text style={styles.agianBtn} onPress={() => {"부모컴포넌트에서 지워주는 값 던져야함"}}>다시하기</Text>
+						
+						<Text style={styles.offBtn} onPress={(e) => {this.setState({text : "Start"})}} onSubmit={this.onFormSubmit}>게임종료</Text>
+						{/* <Text style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }}>게임종료</Text> */}
 					</View>
 
 				</View>
@@ -29,7 +43,7 @@ class Popup extends Component {
 const styles = StyleSheet.create({
 	popup: {
 		width:"90%",
-		height: 150,
+		height: 165,
 		padding: 20,
 		boxSizing: "border-box",
 		backgroundColor: "#fff",
@@ -58,14 +72,14 @@ const styles = StyleSheet.create({
 	},
 	popupContents: {
 		width: "100%",
-		fontSize: 24,
+		fontSize: 22,
 		color: "#242f33",
 		textAlign: "center",
 		marginTop: 20,
-		marginBottom: 30,
-		height:30,
-		lineHeight:30,
-		borderWidth:1,
+		marginBottom: 10,
+		height:40,
+		display:"block",
+		lineHeight:40,
 	},
 	btnWrap: {
 		width: "100%",

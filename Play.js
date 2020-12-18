@@ -9,17 +9,18 @@ class Play extends Component {
 		number3: "",
 		userInput: [],
 		randomNum: this.props.getNum,
-		popupContents: "",
 		resultTag : "",
 		popupAddArea : "",
-		popup: <Popup/>
 	}
 
+	onSearchSubmit(text){
+		console.log(text);
+	}
 	render() {
 
-		let { number1, number2, number3, userInput, randomNum, popupContents, resultTag } = this.state;
+		let { number1, number2, number3, userInput, randomNum, resultTag, popupAddArea } = this.state;
 		console.log("render() , randomNum = " + randomNum);
-
+		// console.log(popup);
 		let clkAudio = new Audio('./assets/mp3/sound.mp3');
 		console.log(clkAudio);
 
@@ -43,12 +44,6 @@ class Play extends Component {
 			else if (number1 != "") this.setState(() => ({ number1: "" }));
 		};
 
-		let popupSwitch = (val) => {
-			if(val == "block")	popupAddArea = popup;
-			else				popupAddArea = <Text>안보여야함</Text>;
-		}
-		
-
 		// 값 확인
 		let confirm = () => {
 			let { strike, ball, out } = { strike: 0, ball: 0, out: 0 };
@@ -63,11 +58,8 @@ class Play extends Component {
 			}
 
 			// viewData 쌓기
-			if (strike === 3) {
-				this.setState(() => ({ popup : <Popup popupContents="축하합니다! 정답 입니다 :D"></Popup> }), popupSwitch("block"));
-				// this.setState(() => ({ popup : <Popup popupContents="축하합니다! 정답 입니다 :D"></Popup> }), () => { document.getElementById("popup").style.display = "block"; });
-
-			} else {
+			if (strike === 3) this.setState(() => ({popupAddArea : <Popup contentsText={"축하합니다! 정답 입니다 :D"} onSubmit={this.onSearchSubmit} />}));
+			else {
 				//하단 리스트 뿌려주기
 				if (ball > 0) result += ball + "Ball ";
 				if (strike > 0) result += strike + "Strike ";
@@ -113,24 +105,7 @@ class Play extends Component {
 						<Text>{resultTag}</Text>
 					</View>
 
-					{/* Layer-Popup */}
-					<View>{popupAddArea}</View>
-					{/* <Popup /> */}
-					{/* <View style={styles.dimdBg}> */}
-						{/* <View style={styles.popup} resizeMode="contain"> */}
-							{/* <Button style={styles.close} onPress={() => { document.getElementById("popup").style.display = "none" }} /> */}
-							{/* <ImageBackground source={require('./assets/img/bats.png')} style={styles.closeImg} resizeMode="contain" ></ImageBackground> */}
-							{/* <Text style={styles.popupContents}>{popupContents}</Text> */}
-							{/* <Text style={styles.popupContents}>testrtred</Text> */}
-
-							{/* <View style={styles.btnWrap}> */}
-								{/* <Button title="다시하기" onPress={() => { document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} /> */}
-								{/* <Text style={styles.agianBtn}>다시하기</Text> */}
-								{/* <Text style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }}>게임종료</Text> */}
-							{/* </View> */}
-
-						{/* </View> */}
-					{/* </View> */}
+					<Text>{popupAddArea}</Text>
 				</ImageBackground>
 			</View>
 		);
@@ -235,73 +210,6 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		borderRadius: 100,
 		lineHeight: 70
-	},
-	popup: {
-		width:"90%",
-		height: 150,
-		padding: 20,
-		boxSizing: "border-box",
-		backgroundColor: "#fff",
-		borderRadius: 10,
-		display: "block",
-		position: "absolute",
-		top: "50%",
-	},
-	dimdBg: {
-		backgroundColor: "rgba(0,0,0,0.5)",
-		width: "100%",
-		height: "100%",
-		display: "block",
-		position: "fixed",
-		top: 0,
-		left: 0,
-		padding:10,
-		// display: "none"
-	},
-	closeImg: {
-		width: 40,
-		height: 40,
-		float: "right",
-		marginTop: -12,
-		marginRight: -12,
-	},
-	popupContents: {
-		width: "100%",
-		fontSize: 24,
-		color: "#242f33",
-		textAlign: "center",
-		marginTop: 20,
-		marginBottom: 30,
-		height:30,
-		lineHeight:30,
-		borderWidth:1,
-	},
-	btnWrap: {
-		width: "100%",
-		height: 50,
-		flex:"wrap",
-		display: "flex",
-		flexWrap: "wrap",
-		marginTop:20,
-		marginBottom:10,
-	},
-	offBtn: {
-		width:"50%",
-		height: 50,
-		color: "#fff",
-		fontSize: 20,
-		textAlign:"center",
-		lineHeight:50,
-		backgroundColor: "#e59509"
-	},
-	agianBtn: {
-		width:"50%",
-		height: 50,
-		color: "#fff",
-		fontSize: 20,
-		textAlign:"center",
-		lineHeight:50,
-		backgroundColor: "#242f33"
 	}
 })
 

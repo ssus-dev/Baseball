@@ -26,7 +26,6 @@ let Game = () => {
     }
 
     return (
-        // <View>{view} + test</View>
         <View style={styles.start}>
             {view}
         </View>
