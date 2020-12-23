@@ -14,8 +14,10 @@ class Play extends Component {
 	}
 
 	onSearchSubmit(text){
+		popupAddArea = null;
 		console.log(text);
 	}
+
 	render() {
 
 		let { number1, number2, number3, userInput, randomNum, resultTag, popupAddArea } = this.state;
@@ -72,7 +74,6 @@ class Play extends Component {
 		}
 
 		return (
-			
 			<View style={styles.playWrap}>
 				<ImageBackground source={require('./assets/img/bg.jpg')} style={styles.bgImg}>
 					{/* User-InputData */}
@@ -106,6 +107,7 @@ class Play extends Component {
 					</View>
 
 					<Text>{popupAddArea}</Text>
+
 				</ImageBackground>
 			</View>
 		);

@@ -9,8 +9,8 @@ class Popup extends Component {
 		changeResult : this.props.changeView
 	}
 
-	onFormSubmit = e => {
-		e.preventDefault();
+	test = () => {
+		//e.preventDefault();
 		this.props.onSubmit(this.state.text);
 	}
 
@@ -28,7 +28,7 @@ class Popup extends Component {
 						{/* <Button title="다시하기" onPress={() => {document.getElementById("popup").style.display = "none" }} style={styles.agianBtn} /> */}
 						<Text style={styles.agianBtn} onPress={() => {"부모컴포넌트에서 지워주는 값 던져야함"}}>다시하기</Text>
 						
-						<Text style={styles.offBtn} onPress={(e) => {this.setState({text : "Start"})}} onSubmit={this.onFormSubmit}>게임종료</Text>
+						<Text style={styles.offBtn} onPress={(e) => {this.setState({text : "Start"})}} onSubmit={this.test}>게임종료</Text>
 						{/* <Text style={styles.offBtn} onPress={() => { this.props.changeView("Start"); }}>게임종료</Text> */}
 					</View>
 
