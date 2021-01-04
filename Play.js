@@ -50,8 +50,6 @@ class Play extends Component {
 
 		// 값 확인
 		let confirm = () => {
-			this.setModalVisible(true);
-			console.log("test");
 			let { strike, ball, out } = { strike: 0, ball: 0, out: 0 };
 			let { result, total } = { result: " ", total: " " };
 
@@ -64,7 +62,10 @@ class Play extends Component {
 			}
 
 			// viewData 쌓기
-			if (strike === 3) this.setState(() => ({ resultText: "축하합니다! 정답 입니다 :D" }));
+			if (strike === 3) {
+				this.setModalVisible(true);
+				this.setState(() => ({ resultText: "축하합니다! 정답 입니다 :D" }));
+			}
 			else {
 				//하단 리스트 뿌려주기
 				if (ball > 0) result += ball + "Ball ";
@@ -103,15 +104,12 @@ class Play extends Component {
 					</View>
 
 					<View style={styles.popup}>
-						<Modal	animationType="slide" transparent={true} visible={this.state.modalVisible} onRequestClose={() => {Alert.alert("Modal has been closed.");}}>
+						<Modal	animationType="slide" transparent={true} visible={this.state.modalVisible}>
 							<View style={styles.modalView}>
-
 								{/* <TouchableHighlight	style={styles.closeImg} onPress={() => {this.setModalVisible(!modalVisible);}}>
 									<ImageBackground source={require('./assets/img/bats.png')} resizeMode="contain"></ImageBackground>
 								</TouchableHighlight> */}
-
 								<Text style={styles.popupContents}>{resultText}</Text>
-								
 								<View style={styles.btnWrap}>
 									<TouchableHighlight	style={styles.agianBtn} onPress={() => {this.setModalVisible(!modalVisible);}}>
 										<Text style={styles.btnTxt}>다시하기</Text>
@@ -133,8 +131,8 @@ class Play extends Component {
 					</View>
 
 					<View style={styles.listWrap}>
-						<Text>· 결과확인</Text>
-						<Text>{resultTag}</Text>
+						<Text style={styles.listTitle}>· 결과확인</Text>
+						<Text style={styles.listArea}>{resultTag}</Text>
 					</View>
 
 				</ImageBackground>
@@ -213,9 +211,14 @@ const styles = StyleSheet.create({
 		width: "100%",
 		marginHorizontal: "auto",
 		marginTop: 30,
-		height: 40,
+	},
+	listTitle:{
+		fontSize:20
+	},
+	listArea : {
 		overflowY: "scroll",
 		backgroundColor: "#fff",
+		height: 80,
 	},
 	list: {
 		width: "100%",
@@ -261,7 +264,9 @@ const styles = StyleSheet.create({
 		flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+		marginTop: 22,
+		padding: 20,
+		flexDirection:'column'
 	},
 	closeImg: {
 		width: 40,
@@ -323,6 +328,7 @@ const styles = StyleSheet.create({
 	},
 	modalView: {
 		width:"90%",
+		top:"35%",
 		borderRadius: 20,
 		alignItems: "center",
 		shadowColor: "#000",
