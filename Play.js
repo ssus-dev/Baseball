@@ -262,11 +262,13 @@ const styles = StyleSheet.create({
 	},
 	popup : {
 		flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
 		marginTop: 22,
 		padding: 20,
-		flexDirection:'column'
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-between",
+		alignContent:" space-between",
+		flexDirection:"row",
 	},
 	closeImg: {
 		width: 40,
@@ -289,11 +291,14 @@ const styles = StyleSheet.create({
 	btnWrap: {
 		width: "100%",
 		height: 50,
-		flex: "wrap",
+		flex: 1,
 		display: "flex",
 		flexWrap: "wrap",
 		marginTop: 20,
 		marginBottom: 10,
+		justifyContent: "space-between",
+		alignContent:" space-between",
+		flexDirection:"row",
 	},
 	offBtn: {
 		width: "45%",
