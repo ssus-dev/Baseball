@@ -262,7 +262,6 @@ const styles = StyleSheet.create({
 	},
 	popup : {
 		flex: 1,
-		marginTop: 22,
 		padding: 20,
 		display: "flex",
 		flexWrap: "wrap",
@@ -288,18 +287,6 @@ const styles = StyleSheet.create({
 		display: "block",
 		lineHeight: 40,
 	},
-	btnWrap: {
-		width: "100%",
-		height: 50,
-		flex: 1,
-		display: "flex",
-		flexWrap: "wrap",
-		marginTop: 20,
-		marginBottom: 10,
-		justifyContent: "space-between",
-		alignContent:" space-between",
-		flexDirection:"row",
-	},
 	offBtn: {
 		width: "45%",
 		height: 50,
@@ -316,24 +303,21 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		backgroundColor: "#242f33"
 	},
-	centeredView: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		marginTop: 22,
-	},
 	btnWrap: {
-		width: "100%",
+		width: "90%",
 		height: 50,
-		flex:"wrap",
+		flex:1,
 		display: "flex",
 		flexWrap: "wrap",
 		marginTop:20,
 		marginBottom:10,
+		justifyContent: "space-between",
+		alignContent:" space-between",
 	},
 	modalView: {
 		width:"90%",
 		top:"35%",
+		left : 20,
 		borderRadius: 20,
 		alignItems: "center",
 		shadowColor: "#000",
@@ -341,11 +325,11 @@ const styles = StyleSheet.create({
 			width: 0,
 			height: 2
 		},
-		backgroundColor:"white",
+		backgroundColor:"#fff",
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
 		elevation: 5
-	},
+	}
 })
 
 export default Play;
